@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback</title>
+
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+
+    <!--=============== REMIXICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&family=Roboto:wght@400;500&display=swap");
+
+        /*=============== VARIABLES CSS ===============*/
+        :root {
+            --header-height: 3.5rem;
+
+            /*========== Colors ==========*/
+            --first-color: #bd6ce0;
+            --title-color: rgb(39, 41, 42);
+            --text-color: rgb(69, 72, 74);
+            --text-color-light: rgb(138, 143, 147);
+            --body-color: rgb(252, 252, 253);
+            --container-color: rgb(242, 242, 243);
+
+            /* Change the first number */
+            /* Blue: 207 - Purple: 250 - Pink: 356 - Teal: 174 */
+            --gradient-color: linear-gradient(180deg,
+                    hsla(180, 48%, 72%, 0),
+                    rgb(189, 108, 224));
+
+            /*========== Font and typography ==========*/
+            /*.5rem = 8px | 1rem = 16px ...*/
+            --body-font: 'Roboto', sans-serif;
+            --title-font: 'Lora', serif;
+            --biggest-font-size: 1.5rem;
+            --h1-font-size: 1.5rem;
+            --h2-font-size: 1.25rem;
+            --h3-font-size: 1rem;
+            --normal-font-size: .938rem;
+            --small-font-size: .813rem;
+            --smaller-font-size: .75rem;
+            --tiny-font-size: .625rem;
+
+        }
+
+        /* Responsive typography */
+        @media screen and (min-width: 1424px) {
+            :root {
+                --biggest-font-size: 3rem;
+                --h1-font-size: 2.25rem;
+                --h2-font-size: 1.5rem;
+                --h3-font-size: 1.25rem;
+                --normal-font-size: 1rem;
+                --small-font-size: .875rem;
+                --smaller-font-size: .813rem;
+            }
+        }
+
+        /*=============== DEFAULT ===============*/
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--body-font);
+            font-size: var(--normal-font-size);
+            background-color: var(--body-color);
+            color: var(--text-color);
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: var(--title-color);
+            font-family: var(--title-font);
+            font-weight: var(--font-medium);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /*=============== REUSABLE CSS CLASSES ===============*/
+        .container {
+            max-width: 1920px;
+            margin-inline: 1.5rem;
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .section {
+            padding-block: 2.5rem;
+        }
+
+        .section_border {
+            border-bottom: 1px solid var(--title-color);
+            padding-bottom: 3.5rem;
+        }
+
+
+
+
+        .main {
+            overflow: hidden;
+            /* For animation */
+        }
+
+        /*=============== HOME ===============*/
+        .home_container {
+            row-gap: 4rem;
+        }
+
+        .home_data {
+            row-gap: 1.5rem;
+        }
+
+        .home_title {
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            padding: 10px;
+            font-size: var(--biggest-font-size);
+            letter-spacing: .3px;
+            background-color: var(--first-color);
+            text-transform: uppercase;
+        }
+
+        .learnimg {
+            height: 40px;
+            width: fit-content;
+        }
+
+        .logos {
+            align-items: center;
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-around;
+            width: 200px;
+
+        }
+
+        .home_blob {
+            position: relative;
+            width: 200px;
+            height: 290px;
+            background-color: var(--body-color);
+            border: 2px solid var(--text-color-light);
+            justify-self: center;
+            border-radius: 6.25rem;
+            place-items: center;
+        }
+
+        .home_prefil {
+            width: 170px;
+            height: 260px;
+            background: var(--gradient-color);
+            border-radius: 5.5rem;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        .home_prefil img {
+            width: 150px;
+        }
+
+        .home_shape-waves,
+        .home_shape-circle {
+            position: absolute;
+            opacity: 1;
+        }
+
+        .home_shape-waves {
+            width: 160px;
+            top: -2rem;
+            left: -3rem;
+            transform: rotate(-15deg);
+            z-index: -1;
+            margin-top: 10px;
+        }
+
+        .home_shape-circle {
+            width: 160px;
+            bottom: -2rem;
+            right: -3rem;
+            transform: rotate(15deg);
+            z-index: -1;
+            margin-bottom: 10px;
+        }
+
+        .home_social {
+            margin-top: 10px;
+            justify-self: center;
+            display: flex;
+            column-gap: 1.25rem;
+        }
+
+        .home_social-link {
+            font-size: 1.25rem;
+            transform-origin: center;
+            transition: transform 0.3s ease;
+        }
+
+        .home_social-link:hover {
+            transform: scale(1.2);
+        }
+
+        .home_info {
+            display: grid;
+            row-gap: 2rem;
+        }
+
+        .home_info-title {
+            font-family: var(--body-font);
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: var(--text-color-light);
+            margin-bottom: 1rem;
+            color: var(--first-color);
+            text-transform: uppercase;
+        }
+
+        .home_info-description {
+            font-family: var(--title-font);
+            color: var(--title-color);
+        }
+
+        .break {
+            width: 200px;
+            margin-top: 30px;
+
+        }
+
+        .home_info-description {
+            padding-right: 1rem;
+        }
+
+        .insideDiv {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /*=============== BREAKPOINTS (SMALL)===============*/
+        @media screen and (max-width: 340px) {
+            .container {
+                margin-inline: 1rem;
+            }
+        }
+
+        /*=============== BREAKPOINTS (MEDIUM)===============*/
+
+        @media screen and (min-width:776px) {
+            .home_container {
+                grid-template-columns: 1fr 2fr 1fr;
+            }
+
+            .home_data {
+                order: 2;
+            }
+
+            .home_info:nth-child(3) {
+                order: 3;
+                text-align: right;
+            }
+
+            .home_info {
+                margin-top: 2rem;
+            }
+
+            .home_info-description {
+                padding-right: 0px;
+            }
+        }
+
+        /*=============== BREAKPOINTS (LARGE)===============*/
+        @media screen and (min-width:1424px) {
+            .home_container {
+                grid-template-columns: 1fr 2fr 1fr;
+            }
+
+            .home_data {
+                order: 2;
+            }
+
+            .home_info:nth-child(3) {
+                order: 3;
+                text-align: right;
+            }
+
+            .home_info {
+                margin-top: 2rem;
+                font-size: 1.2rem;
+            }
+
+            .home_info-description {
+                padding-right: 0px;
+            }
+
+            .home_blob {
+                position: relative;
+                width: 240px;
+                height: 440px;
+                background-color: var(--body-color);
+                border: 2px solid var(--text-color-light);
+                justify-self: center;
+                border-radius: 6.25rem;
+                place-items: center;
+            }
+
+            .home_prefil {
+                width: 215px;
+                height: 415px;
+                background: var(--gradient-color);
+                border-radius: 5.5rem;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+            .home_prefil img {
+                width: 200px;
+            }
+
+            .home_shape-waves,
+            .home_shape-circle {
+                position: absolute;
+                opacity: 1;
+            }
+
+            .home_shape-waves {
+                width: 160px;
+                top: -2rem;
+                left: -3rem;
+                transform: rotate(15deg);
+                z-index: -1;
+            }
+
+            .home_shape-circle {
+                width: 160px;
+                bottom: -2rem;
+                right: -3rem;
+                transform: rotate(15deg);
+                z-index: -1;
+            }
+
+            .home_social {
+                margin-top: 10px;
+                justify-self: center;
+                display: flex;
+                column-gap: 1.25rem;
+            }
+
+            .home_social-link {
+                font-size: 2rem;
+                transform-origin: center;
+                transition: transform 0.3s ease;
+            }
+
+            .home_social-link:hover {
+                transform: scale(1.2);
+            }
+
+            .learnimg {
+                height: 50px;
+                width: fit-content;
+            }
+
+            .logos {
+                align-items: center;
+                margin: 30px auto;
+                display: flex;
+                justify-content: space-around;
+                width: 250px;
+            }
+
+        }
+    </style>
+</head>
+
+<body style="height: 100vh;">
+    <!--==================== MAIN SECTION ====================-->
+    <main class="main">
+        <!--==================== FIRST PAGE HOME ====================-->
+        <section class="home section" id="home">
+            <h1 class="home_title">
+                Constructive Feedback from Vasanthan to Bhadri
+            </h1>
+            <div class="home_container container grid section_border">
+
+                <div class="home_data grid"
+                    style="background-image: url(./images/bgfull.png);  background-size: cover; background-repeat: no-repeat;background-position: center;">
+
+                    <div class="logos">
+                        <div class="logo1" style="cursor: pointer;">
+                            <img src="./images/html.png" alt="html" class="learnimg" id="image_html">
+                        </div>
+                        <div class="logo2" style="cursor: pointer;">
+                            <img src="./images/css.png" alt="html" class="learnimg" id="image_css">
+                        </div>
+                        <div class="logo3" style="cursor: pointer;">
+                            <img src="./images/js.png" alt="html" class="learnimg" id="image_js">
+                        </div>
+                    </div>
+
+                    <div class="home_blob grid">
+                        <div class="home_prefil">
+                            <img src="./images/perfil.png" alt="home prefil">
+                        </div>
+
+                        <img src="./images/shape-circle.svg" alt="" class="src home_shape-waves">
+                        <img src="./images/shape-circle.svg" alt="" class="src home_shape-circle">
+                    </div>
+
+                    <ul class="home_social">
+                        <a href=" https://www.linkedin.com/" target="_blank" class="home_social-link">
+                            <i class="ri-linkedin-box-fill"></i>
+                        </a>
+
+                        <a href=" https://github.com/" target="_blank" class="home_social-link">
+                            <i class="ri-github-fill"></i>
+                        </a>
+
+                        <a href="https://instagram.com/" target="_blank" class="home_social-link">
+                            <i class="ri-instagram-fill"></i>
+                        </a>
+                    </ul>
+                </div>
+
+                <!--==================== FIRST PAGE HOME INFO 1 ====================-->
+                <div class="home_info">
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Clarity and Structure :
+                        </h3>
+                        <p class="home_info-description">
+                            Your classes are well-organized and simple to understand. Your method of introducing complex
+                            coding concepts step by step is quite helpful.
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Motivating Learning Environments in Coding :
+                        </h3>
+                        <p class="home_info-description">
+                            Your dedication to teaching coding produces a good and interesting learning environment that
+                            keeps students engaged and motivated.
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Supportive Environment for Student Success :
+                        </h3>
+                        <p class="home_info-description">
+                            He will always be open for additional support, encouraging a supportive environment that
+                            allows students to seek help and clarification
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Effective Student Engagement and Support :
+                        </h3>
+                        <p class="home_info-description">
+                            He interacts effectively with students, addressing their needs and problems with clarity and
+                            care.
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+                </div>
+
+                <!--==================== FIRST PAGE HOME INFO 2 ====================-->
+                <div class="home_info">
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            JavaScript Clarity :
+                        </h3>
+                        <p class="home_info-description">
+                            You have an remarkable ability to explain complex JavaScript concepts. You break down
+                            complex
+                            topics into easy and easy-to-understand sections, making JavaScript learning an entertaining
+                            and interesting experience.
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Enhancing Learning through Expertise :
+                        </h3>
+                        <p class="home_info-description">
+                            your depth of skill and expertise in this subject matter strongly enhance the learning
+                            experience, giving students a solid understanding of the subject.
+                        </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Empowering Students through Mentorship :
+                        </h3>
+                        <p class="home_info-description">
+
+                            He not only delivers knowledge but also serves as a motivating mentor, pushing students to
+                            work smart and understand their full potential. </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+
+                    <div class="insideDiv">
+                        <h3 class="home_info-title">
+                            Innovative Teaching for Engaging Learning :
+                        </h3>
+                        <p class="home_info-description">
+
+                            He uses new teaching approaches to make learning more interactive and interesting, which
+                            improves the entire learning experience. </p>
+                        <img src="./images/logobreak.png" alt="break" class="break">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <script>
+        const jsImage = document.querySelector("#image_js");
+        const cssImage = document.querySelector("#image_css");
+        const htmlImage = document.querySelector("#image_html");
+        const breakImage = document.querySelectorAll(".break");
+        const homeData = document.querySelector(".home_data");
+        const homePrefil = document.querySelector(".home_prefil");
+
+
+
+        jsImage.addEventListener("click", function () {
+            document.documentElement.style.setProperty("--first-color", "#F0DB4F");
+            breakImage.forEach(function (breakImage) {
+                breakImage.src = "images/logobreakyellow.png";
+            });
+            homeData.style.backgroundImage = "url(images/bgfullyellow.png)";
+            document.documentElement.style.setProperty('--gradient-color', 'linear-gradient(180deg, hsla(180, 48%, 72%, 0), #F0DB4F)');
+        });
+
+        cssImage.addEventListener("click", function () {
+            document.documentElement.style.setProperty("--first-color", "#2965F1");
+            breakImage.forEach(function (breakImage) {
+                breakImage.src = "images/logobreakblue.png";
+            });
+            homeData.style.backgroundImage = "url(images/bgfullblue.png)";
+            document.documentElement.style.setProperty('--gradient-color', 'linear-gradient(180deg, hsla(180, 48%, 72%, 0), #2965F1)');
+        });
+
+        htmlImage.addEventListener("click", function () {
+            document.documentElement.style.setProperty("--first-color", "#E34F26");
+            breakImage.forEach(function (breakImage) {
+                breakImage.src = "images/logobreakorange.png";
+            });
+            homeData.style.backgroundImage = "url(images/bgfullorange.png)";
+            document.documentElement.style.setProperty('--gradient-color', 'linear-gradient(180deg, hsla(180, 48%, 72%, 0), #E34F26)');
+        });
+
+
+    </script>
+</body>
+
+</html>
