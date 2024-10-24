@@ -139,6 +139,16 @@ a {
     display: flex;
     justify-content: space-around;
     width: 200px;
+    height: 100px;
+
+}
+.logsTwo {
+    align-items: center;
+    margin: -50px auto;
+    display: flex;
+    justify-content: space-around;
+    width: 200px;
+    height: 10px;
 
 }
 
